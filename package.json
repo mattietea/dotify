@@ -1,0 +1,98 @@
+{
+  "name": "dotify",
+  "version": "1.0.0",
+  "description": "My Electron application description",
+  "keywords": [],
+  "license": "MIT",
+  "author": "mattietea",
+  "main": ".webpack/main",
+  "scripts": {
+    "dev": "electron-forge start",
+    "lint": "eslint --ext .ts .",
+    "make": "electron-forge make",
+    "package": "electron-forge package",
+    "publish": "electron-forge publish"
+  },
+  "config": {
+    "forge": {
+      "packagerConfig": {},
+      "makers": [
+        {
+          "name": "@electron-forge/maker-squirrel",
+          "config": {
+            "name": "dotify"
+          }
+        },
+        {
+          "name": "@electron-forge/maker-zip",
+          "platforms": [
+            "darwin"
+          ]
+        },
+        {
+          "name": "@electron-forge/maker-deb",
+          "config": {}
+        },
+        {
+          "name": "@electron-forge/maker-rpm",
+          "config": {}
+        }
+      ],
+      "plugins": [
+        [
+          "@electron-forge/plugin-webpack",
+          {
+            "mainConfig": "./webpack.main-config.js",
+            "renderer": {
+              "config": "./webpack.renderer-config.js",
+              "entryPoints": [
+                {
+                  "html": "./src/index.html",
+                  "js": "./src/renderer.tsx",
+                  "name": "main_window"
+                }
+              ]
+            }
+          }
+        ]
+      ]
+    }
+  },
+  "dependencies": {
+    "@babel/core": "^7.12.9",
+    "@babel/preset-env": "^7.12.7",
+    "@babel/preset-react": "^7.12.7",
+    "babel-loader": "^8.2.2",
+    "electron-squirrel-startup": "^1.0.0",
+    "react": "^17.0.1",
+    "react-dom": "^17.0.1",
+    "shelljs": "^0.8.4"
+  },
+  "devDependencies": {
+    "@electron-forge/cli": "^6.0.0-beta.54",
+    "@electron-forge/maker-deb": "^6.0.0-beta.54",
+    "@electron-forge/maker-rpm": "^6.0.0-beta.54",
+    "@electron-forge/maker-squirrel": "^6.0.0-beta.54",
+    "@electron-forge/maker-zip": "^6.0.0-beta.54",
+    "@electron-forge/plugin-webpack": "6.0.0-beta.54",
+    "@marshallofsound/webpack-asset-relocator-loader": "^0.5.0",
+    "@mattietea/eslint-config": "^1.7.0",
+    "@pmmmwh/react-refresh-webpack-plugin": "^0.4.3",
+    "@types/babel__core": "^7.1.12",
+    "@types/babel__preset-env": "^7.9.1",
+    "@types/eslint": "^7.2.6",
+    "@types/react": "^17.0.0",
+    "@types/react-dom": "^17.0.0",
+    "css-loader": "^4.2.1",
+    "electron": "11.0.3",
+    "eslint": "^7.6.0",
+    "fork-ts-checker-webpack-plugin": "^5.0.14",
+    "node-loader": "^1.0.1",
+    "prettier": "^2.2.1",
+    "react-refresh": "^0.9.0",
+    "style-loader": "^1.2.1",
+    "ts-loader": "^8.0.2",
+    "typescript": "^4.0.2"
+  },
+  "productName": "dotify"
+}
